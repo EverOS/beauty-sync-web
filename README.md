@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# BeautySync Web
 
-## Getting Started
+Bem-vindo ao frontend do **BeautySync**. Esta aplicação é a interface web construída em **Next.js** para se conectar ao backend e entregar a melhor experiência para usuários e administradores.
 
-First, run the development server:
+## 🔍 Visão geral
+
+- Projeto: frontend web do BeautySync
+- Framework: **Next.js** usando o **App Router**
+- Linguagem: **TypeScript**
+- Estilo: **Tailwind CSS**
+- Objetivo: fornecer uma interface rápida, organizada e responsiva para a plataforma BeautySync
+
+## 🧩 Tecnologias
+
+- **Next.js**
+- **React**
+- **TypeScript**
+- **Tailwind CSS**
+
+## 🚀 Executar localmente
+
+### Pré-requisitos
+
+- Node.js 18 ou superior
+- npm 10+ (ou compatível com o projeto)
+
+### Passos
 
 ```bash
+git clone <URL_DO_SEU_REPOSITORIO_AQUI>
+cd beauty-sync-web
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abra no navegador:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```text
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📁 Estrutura principal do projeto
 
-## Learn More
+- `src/app/` – rotas e páginas do Next.js
+- `src/app/layout.tsx` – layout principal da aplicação
+- `src/app/page.tsx` – página inicial
+- `src/app/globals.css` – estilos globais
+- `next.config.ts` – configuração do Next.js
+- `tsconfig.json` – configuração do TypeScript
 
-To learn more about Next.js, take a look at the following resources:
+## 🧪 Scripts úteis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `npm run dev` — inicia o servidor de desenvolvimento
+- `npm run build` — gera build de produção
+- `npm run lint` — executa lint no código
+- `npm run start` — inicia a aplicação em modo de produção
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 💡 Observações
 
-## Deploy on Vercel
+- Substitua ` <URL_DO_SEU_REPOSITORIO_AQUI>` pela URL real do repositório ao clonar.
+- Garanta que o backend do BeautySync esteja rodando e acessível para que a interface funcione corretamente.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📬 Contato
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Se precisar de ajuda com a configuração do frontend ou integração com o backend, adicione suas dúvidas diretamente neste repositório ou no canal de equipe apropriado.
