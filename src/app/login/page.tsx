@@ -1,6 +1,7 @@
 "use client"; // Avisa o Next.js que esta tela roda no navegador do usuário (precisa de interatividade)
 
 import { useState } from "react";
+const API_URL = "http://localhost:3333";
 
 export default function LoginPage() {
   // O nosso "caderninho" para guardar o que o usuário digita
@@ -8,12 +9,28 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
 
   // A função que roda quando clicamos em "Entrar"
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault(); // Impede a página de recarregar "piscando"
-    
-    // Por enquanto, apenas mostramos no painel de desenvolvedor o que capturamos
-    console.log("Sucesso! O React capturou os dados:", { email, password });
-  };
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    const response = await fetch(`${API_URL}/login`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.log("Erro no login:", data.error);
+      return;
+    }
+
+    console.log("Login OK! Resposta da API:", data);
+  } catch (error) {
+    console.log("Não consegui falar com a API:", error);
+  }
+};
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-900 px-4">
