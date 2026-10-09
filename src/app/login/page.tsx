@@ -9,10 +9,12 @@ export default function LoginPage() {
   // O nosso "caderninho" para guardar o que o usuário digita
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   // A função que roda quando clicamos em "Entrar"
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
 
     try {
       const response = await fetch(`${API_URL}/login`, {
@@ -24,14 +26,18 @@ export default function LoginPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        console.log("Erro no login:", data.error);
+        setError(
+          response.status === 401
+            ? "E-mail ou senha incorretos."
+            : "Algo deu errado. Tente novamente.",
+        );
         return;
       }
 
       localStorage.setItem("token", data.token);
       router.push("/dashboard");
     } catch (error) {
-      console.log("Não consegui falar com a API:", error);
+      setError("Não foi possível conectar ao servidor.");
     }
   };
 
@@ -84,6 +90,7 @@ export default function LoginPage() {
 
           </div>
 
+          {error && <p className="text-sm text-red-400">{error}</p>}
           <div>
             <button
               type="submit" // Mudamos para 'submit' para acionar o form
