@@ -1,41 +1,50 @@
 "use client"; // Avisa o Next.js que esta tela roda no navegador do usuário (precisa de interatividade)
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 const API_URL = "http://localhost:3333";
 
 export default function LoginPage() {
+  const router = useRouter();
   // O nosso "caderninho" para guardar o que o usuário digita
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   // A função que roda quando clicamos em "Entrar"
   const handleLogin = async (e: React.FormEvent) => {
-  e.preventDefault();
+    e.preventDefault();
+    setError("");
 
-  try {
-    const response = await fetch(`${API_URL}/login`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    try {
+      const response = await fetch(`${API_URL}/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    const data = await response.json();
+      const data = await response.json();
 
-    if (!response.ok) {
-      console.log("Erro no login:", data.error);
-      return;
+      if (!response.ok) {
+        setError(
+          response.status === 401
+            ? "E-mail ou senha incorretos."
+            : "Algo deu errado. Tente novamente.",
+        );
+        return;
+      }
+
+      localStorage.setItem("token", data.token);
+      router.push("/dashboard");
+    } catch {
+      setError("Não foi possível conectar ao servidor.");
     }
-
-    console.log("Login OK! Resposta da API:", data);
-  } catch (error) {
-    console.log("Não consegui falar com a API:", error);
-  }
-};
+  };
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-900 px-4">
       <div className="w-full max-w-md space-y-8 rounded-xl bg-zinc-800 p-8 shadow-2xl">
-        
+
         <div className="text-center">
           <h2 className="text-3xl font-bold tracking-tight text-white">
             BeautySync
@@ -48,7 +57,7 @@ export default function LoginPage() {
         {/* Adicionamos o evento onSubmit no formulário */}
         <form onSubmit={handleLogin} className="mt-8 space-y-6">
           <div className="space-y-4">
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-zinc-300">
                 E-mail
@@ -78,9 +87,10 @@ export default function LoginPage() {
                 placeholder="••••••••"
               />
             </div>
-            
+
           </div>
 
+          {error && <p className="text-sm text-red-400">{error}</p>}
           <div>
             <button
               type="submit" // Mudamos para 'submit' para acionar o form
