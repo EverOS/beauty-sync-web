@@ -1,9 +1,11 @@
 "use client"; // Avisa o Next.js que esta tela roda no navegador do usuário (precisa de interatividade)
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 const API_URL = "http://localhost:3333";
 
 export default function LoginPage() {
+  const router = useRouter();
   // O nosso "caderninho" para guardar o que o usuário digita
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -27,7 +29,7 @@ export default function LoginPage() {
       }
 
       localStorage.setItem("token", data.token);
-      console.log("Login OK! Token guardado.");
+      router.push("/dashboard");
     } catch (error) {
       console.log("Não consegui falar com a API:", error);
     }
