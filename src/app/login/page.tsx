@@ -36,7 +36,7 @@ export default function LoginPage() {
 
       localStorage.setItem("token", data.token);
       router.push("/dashboard");
-    } catch (error) {
+    } catch {
       setError("Não foi possível conectar ao servidor.");
     }
   };
