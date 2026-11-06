@@ -30,13 +30,14 @@ Bem-vindo ao frontend do **BeautySync**. Esta aplicação é a interface web con
 git clone <URL_DO_SEU_REPOSITORIO_AQUI>
 cd beauty-sync-web
 npm install
+cp .env.example .env.local
 npm run dev
 ```
 
 Abra no navegador:
 
 ```text
-http://localhost:3000
+http://localhost:9000
 ```
 
 ## 📁 Estrutura principal do projeto
@@ -59,6 +60,7 @@ http://localhost:3000
 
 - Substitua ` <URL_DO_SEU_REPOSITORIO_AQUI>` pela URL real do repositório ao clonar.
 - Garanta que o backend do BeautySync esteja rodando e acessível para que a interface funcione corretamente.
+- A API precisa estar rodando em `http://localhost:3000`. O endereço fica na variável `NEXT_PUBLIC_API_URL`, dentro do `.env.local`.
 
 ## 📬 Contato
 
